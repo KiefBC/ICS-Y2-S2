@@ -1,0 +1,17 @@
+{
+  "name": "program7",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "args": {
+    "number1": "The first number to operate on",
+    "operator": "The operator to use",
+    "number2": "The second number to operate on"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
