@@ -2,6 +2,7 @@
 import { useState } from "react";
 import FilterMessage from "./FilterMessage";
 import DisplayMessages from "./DisplayMessages";
+import Header from "./Header";
 import Link from "next/link";
 
 const MessageBoard = () => {
@@ -9,21 +10,15 @@ const MessageBoard = () => {
 
   return (
     <>
+      <Header />
       <FilterMessage
         searchMessage={searchMessage}
         handleSearchMessageChange={(event) =>
           setSearchMessage(event.target.value)
         }
       />
-      {/* <Box sx={{ ml: 2, mt: 2, width: 265, display: 'flex', justifyContent: 'flex-end' }}>
-        <Link
-          to="/addmessage"
-        >
-          Add a Message
-        </Link>
-      </Box> */}
-      <div>
-        <Link href="/addmessage">Add a Message</Link>
+      <div className="flex justify-center m-4">
+        <Link href="/addmessage" className="btn btn-wide">Add a Message</Link>
       </div>
       <DisplayMessages searchMessage={searchMessage} />
     </>

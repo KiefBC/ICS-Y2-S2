@@ -15,17 +15,42 @@ const Message = ({ id, messageText }) => {
     setIsEditable(false);
   }
 
+  const handleDoubleClick = () => {
+    if (window.innerWidth >= 768) {
+      setIsEditable(true);
+    }
+  }
+
   return (
-    <li style={{ color: '#333333' }} onDoubleClick={ () => setIsEditable(true) }>
-      { isEditable
-        ? <EditMessageForm
-            messageText={messageText}
-            modifyMessage={modifyMessage}
-          />
-        : messageText 
-      }
-      <button style={{ marginLeft: '8px', color: 'red' }} onClick={ () => deleteMessage(id) }>(Delete)</button>
-    </li>
+    <div className="card w-80 bg-white shadow-lg mb-2 mx-auto">
+      <div className="card-body p-4">
+        <div 
+          className="flex justify-between items-center sm:cursor-pointer" 
+          onDoubleClick={handleDoubleClick}
+        >
+          <div className="flex-grow text-center">
+            {isEditable 
+              ? <EditMessageForm
+                  messageText={messageText}
+                  modifyMessage={modifyMessage}
+                />
+              : <p className="text-neutral">
+                  {messageText}
+                  <span className="hidden sm:inline text-xs text-gray-400 pl-2">
+                    (double click to edit)
+                  </span>
+                </p>
+            }
+          </div>
+          <button 
+            className="btn btn-ghost btn-xs btn-outline ml-2" 
+            onClick={() => deleteMessage(id)}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 

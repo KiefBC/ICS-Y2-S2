@@ -12,8 +12,7 @@ const DisplayMessages = ({ searchMessage }) => {
     : messages
   
   return (
-    // <List sx={{ ml: 1 }}>
-    <ul>
+    <ul className="flex flex-col items-center">
       {messagesToShow.map(message =>
         <Message
           key={message.id}
@@ -22,7 +21,6 @@ const DisplayMessages = ({ searchMessage }) => {
         />
       )}
     </ul>
-    // </List>
   );
 }
 

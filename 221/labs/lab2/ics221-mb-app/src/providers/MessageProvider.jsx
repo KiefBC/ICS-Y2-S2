@@ -15,10 +15,12 @@ const MessageProvider = ({ children }) => {
     // start of IIFE
     (async () => {
       try {
+        console.log('Fetching messages from:', process.env.NEXT_PUBLIC_SERVICE_URL);
         const serverMessages = await messageService.getAll();
+        console.log('Received messages:', serverMessages);
         setMessages(serverMessages);
       } catch (error) {
-        console.log('API Error: ' + error);
+        console.error('API Error:', error.response || error);
       }
     })();
     // end IFFE

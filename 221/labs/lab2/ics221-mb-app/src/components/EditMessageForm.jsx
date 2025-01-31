@@ -14,6 +14,7 @@ const EditMessageForm = ({ messageText, modifyMessage }) => {
         <input type='text'
           value={modifiedText}
           onChange={event => setModifiedText(event.target.value)}
+          className="input input-bordered w-1/2 max-w-xs"
         />
     </form>
   );
