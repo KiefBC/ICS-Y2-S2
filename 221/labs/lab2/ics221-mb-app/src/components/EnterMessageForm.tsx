@@ -52,8 +52,19 @@ const EnterMessageForm = () => {
               <input type="text" {...register("messageText")} id="message" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter a message..." />
               <p className="ml-1 mt-2 text-sm text-red-600">{errors.messageText?.message}</p>
             </div>
-            <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Add Message</button>
+            <div className="mt-6 grid gap-3">
+              <button 
+                type="submit" 
+                className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border bg-transparent text-gray-800 hover:bg-gray-100 hover:text-gray-900 dark:text-white dark:hover:bg-neutral-800"
+              >
+                Add Message
+              </button>
+              <a 
+                href="/"
+                className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-500 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+              >
+                Back to Home
+              </a>
             </div>
           </form>
         </div>
