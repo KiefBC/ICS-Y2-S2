@@ -1,0 +1,181 @@
+{
+    "openapi": "3.1.1",
+    "info": {
+        "title": "Message Board API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3004/v1",
+            "description": "Message Board API Dev Server"
+        }
+    ],
+    "security": [],
+    "components": {
+        "schemas": {
+            "Message": {
+                "type": "object",
+                "description": "A message",
+                "required": [
+                    "text"
+                ],
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "minLength": 3,
+                        "maxLength": 30,
+                        "description": "A message's text.",
+                        "example": "Hello World!"
+                    }
+                }
+            },
+            "MessageWithId": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Message"
+                    },
+                    {
+                        "type": "object",
+                        "description": "A message with id",
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "message's id.",
+                                "example": "f37d"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "paths": {
+        "/messages": {
+            "description": "All the messages",
+            "get": {
+                "summary": "List all the messages",
+                "operationId": "getAllMessages",
+                "description": "List all the messages in the order they were posted (newest at top).",
+                "responses": {
+                    "200": {
+                        "description": "All the messages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MessageWithId"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid message data"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new message",
+                "operationId": "createMessage",
+                "description": "Create a new message",
+                "requestBody": {
+                    "required": true,
+                    "description": "Message's data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Message"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageWithId"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid message data"
+                    }
+                }
+            }
+        },
+        "/messages/{id}": {
+            "description": "A single message in the collection of messages.",
+            "patch": {
+                "summary": "Update a message",
+                "operationId": "updateAMessage",
+                "description": "Update a message by id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A message's id",
+                        "example": "f37d"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Message's data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Message"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "The updated message"
+                    },
+                    "400": {
+                        "description": "Invalid message data"
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a message",
+                "operationId": "deleteAMessage",
+                "description": "Delete a message by id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "A message's id",
+                        "example": "f37d"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The deleted message"
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                }
+            }
+        }
+    }
+}
