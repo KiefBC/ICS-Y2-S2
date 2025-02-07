@@ -42,9 +42,9 @@
                         ],
                         "properties": {
                             "id": {
-                                "type": "string",
+                                "type": "integer",
                                 "description": "message's id.",
-                                "example": "f37d"
+                                "example": 1
                             }
                         }
                     }
@@ -105,7 +105,7 @@
                         }
                     },
                     "400": {
-                        "description": "Invalid message data"
+                        "description": "Bad Request. The message in the body of the Request is either missing or malformed."
                     }
                 }
             }
@@ -122,10 +122,10 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "description": "A message's id",
-                        "example": "f37d"
+                        "example": 1
                     }
                 ],
                 "requestBody": {
@@ -140,11 +140,18 @@
                     }
                 },
                 "responses": {
-                    "204": {
-                        "description": "The updated message"
+                    "200": {
+                        "description": "The updated message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageWithId"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Invalid message data"
+                        "description": "Unknown Error PATCH"
                     },
                     "404": {
                         "description": "Message not found"
@@ -161,15 +168,25 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "description": "A message's id",
-                        "example": "f37d"
+                        "example": 1
                     }
                 ],
                 "responses": {
-                    "204": {
-                        "description": "The deleted message"
+                    "200": {
+                        "description": "The deleted message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageWithId"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unknown Error DELETE"
                     },
                     "404": {
                         "description": "Message not found"

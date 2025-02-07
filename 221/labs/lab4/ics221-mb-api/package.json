@@ -19,7 +19,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "docs:build": "redocly build-docs docs/mb-api-spec.json -o docs/index.html",
+    "docs:preview": "redocly preview-docs docs/mb-api-spec.json"
   },
   "keywords": [],
   "author": "",
